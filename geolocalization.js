@@ -14,7 +14,7 @@ function start(){
 
 function geolocalizate(){
     let element = document.getElementById('localization');
-    fetch('https://ipinfo.io/json')
+    fetch('https://ipinfo.io/json') //http://ip-api.com/json
     .then(response => response.json())
     .then(function(result) { 
         let countryCode = result.country;
