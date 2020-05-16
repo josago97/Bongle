@@ -14,37 +14,33 @@ function start(){
 
 function geolocalizate(){
     let element = document.getElementById('localization');
-    let request = new XMLHttpRequest();
-    request.open('GET', 'http://ip-api.com/json', true);
-    request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
-    request.onreadystatechange = function() { 
-        if (this.readyState == 4 && this.status == 200) {
-            let result = JSON.parse(this.responseText);
-            if(result.status == 'success'){
-                
-                let position = [result.city, result.regionName, result.country].join(', ');
-                let maps = 'https://www.google.es/maps/@' + result.lat + ',' + result.lon + ',10z';
-                positionElement = document.createElement('a');
-                element.appendChild(positionElement);
-                positionElement.href = maps;
-                positionElement.innerHTML = position;
-                positionElement.className = 'footer-link';
-
-                let ip = result.query;
-                ipElement = document.createElement('span');
-                element.appendChild(ipElement);
-                ipElement.innerHTML = 'Your IP: ' + ip;
-
-                changeButtom.style.display = 'initial';
-                showLocalization();
-            }
-        } 
-    };
+    fetch('https://ipinfo.io/json')
+    .then(response => response.json())
+    .then(function(result) { 
+        let countryCode = result.country;
+        fetch('https://restcountries.eu/rest/v2/alpha/' + countryCode)
+        .then(response => response.json())
+        .then(function(result2){
+            let position = [result.city, result.region, result2.name].join(', ');
+            let maps = 'https://www.google.es/maps/@' + result.loc + ',10z';
+            positionElement = document.createElement('a');
+            element.appendChild(positionElement);
+            positionElement.href = maps;
+            positionElement.innerHTML = position;
+            positionElement.className = 'footer-link';
     
-    request.onerror = function() { 
-        element.innerHTML = 'Error localization (disable Ad Blockers)';
-    };
-    request.send();
+            let ip = result.ip;
+            ipElement = document.createElement('span');
+            element.appendChild(ipElement);
+            ipElement.innerHTML = 'Your IP: ' + ip;
+    
+            changeButtom.style.display = 'initial';
+            showLocalization(); 
+        })
+    })
+    .catch(function() { 
+        element.innerHTML = 'Error geolocalization (try disable Ad Blockers)';
+    });
 }
 
 function changeLocalization(){
