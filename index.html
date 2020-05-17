@@ -42,7 +42,7 @@
             </div>
             <div class="footer-info">
                 <div class="footer-info-localization">
-                    <img id="changeLocalization" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/OOjs_UI_icon_reload.svg/1200px-OOjs_UI_icon_reload.svg.png" class="change-localization-buttom"/>
+                    <img id="changeLocalization" src="" class="change-localization-buttom"/>
                     <span id="localization"></span>
                 </div>
                 <span id="loveMessage" class="love-message"><span class="emoji">&#x2764;</span> Made with love :3 <span class="emoji">&#x2764;</span></span> 
@@ -52,14 +52,15 @@
         
     </body>
 
-    <script src="cat.js"></script>
-    <script src="catparade.js"></script>
-    <script src="geolocalization.js"></script>
+    <script src="js/preloader.js"></script>
+    <script src="js/cat.js"></script>
+    <script src="js/catparade.js"></script>
+    <script src="js/geolocalization.js"></script>
 
     <script>
-        var input = document.getElementById("searchInput");
-        var inputClear = document.getElementById("searchClearInput");
-        var form = document.getElementById("searchForm");
+        var input = document.getElementById('searchInput');
+        var inputClear = document.getElementById('searchClearInput');
+        var form = document.getElementById('searchForm');
 
         onInputChanged();
 
@@ -67,7 +68,7 @@
             let text = input.value.trim();
             
             if(text.length > 0){
-                input.autocomplete = "off";
+                input.autocomplete = 'off';
                 window.location = 'https://www.google.es/search?safe=active&q=' + text;
             }
         }
@@ -77,13 +78,13 @@
         }
 
         function onInputChanged(){
-            input.autocomplete = "on";
+            input.autocomplete = 'on';
 
             if(input.value.length > 0){
-                inputClear.style.visibility = "visible";
+                inputClear.style.visibility = 'visible';
             }
             else{
-                inputClear.style.visibility = "hidden";
+                inputClear.style.visibility = 'hidden';
             }
         }
 
@@ -94,7 +95,7 @@
         }
 
         function getLuck(){
-            input.autocomplete = "off";
+            input.autocomplete = 'off';
             let text = input.value.trim();
             
             if(text.length > 0){
