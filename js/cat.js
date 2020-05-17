@@ -60,7 +60,7 @@ function onKeyUp(event){
 }
 
 function onFocusOut(){
-    timer = setTimeout(function(){image.src = normal;}, 100);
+    timer = setTimeout(function(){image.src = normal;}, 200);
 }
 
 function meow(){
