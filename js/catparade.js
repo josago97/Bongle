@@ -1,33 +1,42 @@
 const FPS = 60; //Fotogramas por segundo :3
-const SPEED = 6.6; //Velocidad de movimiento de los gatitos (% de ancho de ventana) :3
+const SPEED = 8.1; //Velocidad de movimiento de los gatitos (% de ancho de ventana) :3
 const SPACE = 5; //Espacio de separacion de gatitos (% de ancho de ventana) :3
 const START_OFFSET = 1; //Offset del tiempo en instanciar el primer gatito (segundos) :3
-const CAT_SIZE = 8; //Anchura de los gatitos (% de ancho de ventana) :3
+const CAT_SIZE = 12; //Anchura de los gatitos (% de ancho de ventana) :3
 
 var head = 'images/catparade/head.gif';
+var accordion = 'images/catparade/accordion.gif';
+var bassDrum = 'images/catparade/bassdrum.gif';
 var drum = 'images/catparade/drum.gif';
+var flute = 'images/catparade/flute.gif';
+var guitar = 'images/catparade/guitar.gif';
+var tambourine = 'images/catparade/tambourine.gif';
+var triangle = 'images/catparade/triangle.gif';
+var tuba = 'images/catparade/tuba.gif';
+var xylophone = 'images/catparade/xylophone.gif';
+
 
 var cats = [
     head,
     drum,
-    head,
+    guitar,
+    tambourine,
+    flute,
+    flute,
+    flute,
+    xylophone,
+    triangle,
+    tuba,
+    accordion,
+    tambourine,
     drum,
-    head,
+    flute,
+    accordion,
+    xylophone,
+    guitar,
     drum,
-    head,
-    drum,
-    head,
-    drum,
-    head,
-    drum,
-    head,
-    drum,
-    head,
-    drum,
-    head,
-    drum,
-    head,
-    drum
+    triangle,
+    bassDrum
 ];
 
 var catInstances;
@@ -39,14 +48,12 @@ var catParent = document.getElementById('catParade');
 document.getElementById('loveMessage').addEventListener('click', start);
 
 async function start(){
-    /*if(!running){
+    if(!running){
         running = true;
         create();
         playSong();
         update();
-    }*/
-
-    alert('Work in process :3');
+    }
 }
 
 async function update(){
