@@ -58,8 +58,12 @@
     <script src="js/geolocalization.js"></script>
 
     <script>
-        if(!!window.performance && window.performance.navigation.type == 2){
+        /*if(!!window.performance && window.performance.navigation.type == 2){
             window.location.reload(true);
+        }*/
+
+        if(window.performance){
+            console.log(window.performance.navigation.type);
         }
 
         var input = document.getElementById('searchInput');
