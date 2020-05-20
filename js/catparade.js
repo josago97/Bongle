@@ -1,7 +1,7 @@
 const FPS = 60; //Fotogramas por segundo :3
-const SPEED = 8.1; //Velocidad de movimiento de los gatitos (% de ancho de ventana) :3
-const SPACE = 5; //Espacio de separacion de gatitos (% de ancho de ventana) :3
-const START_OFFSET = 1; //Offset del tiempo en instanciar el primer gatito (segundos) :3
+const SPEED = 6.15; //Velocidad de movimiento de los gatitos (% de ancho de ventana) :3
+const SPACE = 1; //Espacio de separacion de gatitos (% de ancho de ventana) :3
+const START_OFFSET = 0; //Offset del tiempo en instanciar el primer gatito (segundos) :3
 const CAT_SIZE = 12; //Anchura de los gatitos (% de ancho de ventana) :3
 
 var head = 'images/catparade/head.gif';
@@ -34,8 +34,6 @@ var cats = [
     accordion,
     xylophone,
     guitar,
-    drum,
-    triangle,
     bassDrum
 ];
 
