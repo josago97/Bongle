@@ -1,7 +1,6 @@
-const FPS = 60; //Fotogramas por segundo :3
-const SPEED = 6.15; //Velocidad de movimiento de los gatitos (% de ancho de ventana) :3
+const FPS = 100; //Fotogramas por segundo :3
 const SPACE = 1; //Espacio de separacion de gatitos (% de ancho de ventana) :3
-const START_OFFSET = 0; //Offset del tiempo en instanciar el primer gatito (segundos) :3
+const START_OFFSET = 1; //Offset del tiempo en instanciar el primer gatito (segundos) :3
 const CAT_SIZE = 12; //Anchura de los gatitos (% de ancho de ventana) :3
 
 var head = 'images/catparade/head.gif';
@@ -37,11 +36,13 @@ var cats = [
     bassDrum
 ];
 
+var audio;
 var catInstances;
 var catInstancesPos = 0;
 var deltaTime = 0;
 var running = false;
 var catParent = document.getElementById('catParade');
+var size;
 
 document.getElementById('loveMessage').addEventListener('click', start);
 
@@ -65,12 +66,12 @@ async function update(){
 }
 
 function move(){
-    catInstancesPos += deltaTime * SPEED;
-    catInstances.style.left = catInstancesPos + 'vw';
+    var prop = (audio.currentTime - START_OFFSET) / (audio.duration - START_OFFSET);
+    catInstances.style.left = prop * (size + 100) + 'vw';
 }
 
 function playSong(){
-    let audio = new Audio('sounds/catparade.mp3');
+    audio = new Audio('sounds/catparade.mp3');
     audio.autoplay = true;
     audio.onended = finish;
     audio.volume = 0.5;
@@ -79,7 +80,7 @@ function playSong(){
 
 function create(){
     let dom = document.createElement('div');
-    let position = -CAT_SIZE - START_OFFSET * SPEED;
+    let position = -CAT_SIZE / 2;
 
     for(var cat of cats){
         let image = document.createElement('img');
@@ -97,6 +98,7 @@ function create(){
     dom.style.left = '0';
     catParent.appendChild(dom); 
     catInstances = dom;
+    size = CAT_SIZE * cats.length + SPACE * (CAT_SIZE - 1);
 }
 
 function wait(time) {
