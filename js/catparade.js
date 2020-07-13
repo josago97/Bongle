@@ -95,7 +95,7 @@ function create(){
     }
 
     dom.className = 'cat-parade';
-    dom.style.left = '0';
+    dom.style.left = '-100vw';
     catParent.appendChild(dom); 
     catInstances = dom;
     size = CAT_SIZE * cats.length + SPACE * (CAT_SIZE - 1);
