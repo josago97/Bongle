@@ -1,3 +1,3 @@
 # Bongle
 
-www.bongle.cat
+www.bongle.ga
