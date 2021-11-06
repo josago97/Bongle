@@ -18,7 +18,7 @@ function geolocalizate(){
     .then(response => response.json())
     .then(function(result) { 
         let countryCode = result.country;
-        fetch('https://restcountries.eu/rest/v2/alpha/' + countryCode)
+        fetch('https://restcountries.com/v2/alpha/' + countryCode)
         .then(response => response.json())
         .then(function(result2){
             let position = [result.city, result.region, result2.name].join(', ');
@@ -32,7 +32,7 @@ function geolocalizate(){
             let ip = result.ip;
             ipElement = document.createElement('span');
             element.appendChild(ipElement);
-            ipElement.innerHTML = 'Your IP: ' + ip;
+            ipElement.innerHTML = ip;
     
             changeButtom.style.display = 'initial';
             showLocalization(); 
