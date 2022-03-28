@@ -71,7 +71,7 @@
             
             if(text.length > 0){
                 input.autocomplete = 'off';
-                window.location = 'https://www.google.es/search?safe=active&q=' + text;
+                window.location = 'https://www.google.com/search?q=' + text;
             }
         }
 
@@ -98,26 +98,32 @@
 
         function getLuck(){
             input.autocomplete = 'off';
-            let text = input.value.trim();
+
+            let text =  input.value.trim();
             
             if(text.length > 0){
                 let request = new XMLHttpRequest();
-                request.open('GET', 'https://cors-anywhere.herokuapp.com/' + 'https://www.google.es/search?safe=active&q=' + text, true);
-                request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
-                request.onreadystatechange = function() { 
+                let queryUrl = `https://www.google.com/search?q=${text}`;
+                request.open('GET', `https://api.allorigins.win/raw?charset=UTF-8&url=${queryUrl}`, true);
+                //request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+                request.responseType = "document";
+                
+                request.onload = function() { 
                     if (this.readyState == 4 && this.status == 200) {
-                        let result = this.responseText;
-                        let web = result.split('<div class="r"><a href="')[1].split('"')[0];
-                        window.location = web;
-                        console.log(web);
-                    }
+
+                        let url = request.responseXML.querySelector('div.egMi0.kCrYT a')
+                            .getAttribute('href')
+                            .replace('/url?q=', '')
+                            .split('&sa=U')[0];
+
+                        window.location = decodeURIComponent(url);
+                   }
                 };
                 request.onerror = function(){window.location = 'https://www.google.com/doodles';};
-                request.send();
-    
+               request.send();
             }else{
                 window.location = 'https://www.google.com/doodles';
-            }       
+            }     
         }
     </script>
 </html>
