@@ -14,11 +14,11 @@ function start(){
 
 function geolocalizate(){
     let element = document.getElementById('localization');
-    fetch('http://ip-api.com/json')     //'https://ipinfo.io/json'
+    fetch('https://get.geojs.io/v1/ip/geo.json')
     .then(response => response.json())
     .then(function(result) {    
-        let position = [result.city, result.regionName, result.country].join(', ');
-        let coordenates = `${result.lat},${result.lon}`; 
+        let position = [result.city, result.region, result.country].join(', ');
+        let coordenates = `${result.latitude},${result.longitude}`; 
         let maps = 'https://www.google.es/maps/@' + coordenates + ',12z';
         positionElement = document.createElement('a');
         element.appendChild(positionElement);
@@ -26,7 +26,7 @@ function geolocalizate(){
         positionElement.innerHTML = position;
         positionElement.className = 'footer-link';
 
-        let ip = result.query;
+        let ip = result.ip;
         ipElement = document.createElement('span');
         element.appendChild(ipElement);
         ipElement.innerHTML = ip;
