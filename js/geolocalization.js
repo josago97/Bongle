@@ -14,29 +14,25 @@ function start(){
 
 function geolocalizate(){
     let element = document.getElementById('localization');
-    fetch('https://ipinfo.io/json') //http://ip-api.com/json
+    fetch('http://ip-api.com/json')     //'https://ipinfo.io/json'
     .then(response => response.json())
-    .then(function(result) { 
-        let countryCode = result.country;
-        fetch('https://restcountries.com/v2/alpha/' + countryCode)
-        .then(response => response.json())
-        .then(function(result2){
-            let position = [result.city, result.region, result2.name].join(', ');
-            let maps = 'https://www.google.es/maps/@' + result.loc + ',10z';
-            positionElement = document.createElement('a');
-            element.appendChild(positionElement);
-            positionElement.href = maps;
-            positionElement.innerHTML = position;
-            positionElement.className = 'footer-link';
-    
-            let ip = result.ip;
-            ipElement = document.createElement('span');
-            element.appendChild(ipElement);
-            ipElement.innerHTML = ip;
-    
-            changeButtom.style.display = 'initial';
-            showLocalization(); 
-        })
+    .then(function(result) {    
+        let position = [result.city, result.regionName, result.country].join(', ');
+        let coordenates = `${result.lat},${result.lon}`; 
+        let maps = 'https://www.google.es/maps/@' + coordenates + ',12z';
+        positionElement = document.createElement('a');
+        element.appendChild(positionElement);
+        positionElement.href = maps;
+        positionElement.innerHTML = position;
+        positionElement.className = 'footer-link';
+
+        let ip = result.query;
+        ipElement = document.createElement('span');
+        element.appendChild(ipElement);
+        ipElement.innerHTML = ip;
+
+        changeButtom.style.display = 'initial';
+        showLocalization();
     })
     .catch(function() { 
         element.innerHTML = 'Error geolocalization (try disable Ad Blockers)';
