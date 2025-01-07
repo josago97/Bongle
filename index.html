@@ -1,129 +1,79 @@
 <!DOCTYPE html>
 
 <html>
-    <head>
-        <meta charset="utf-8"/>
-        <title>Bongle</title>
-        <link rel="icon" href="images/favicon.png">
-        <link rel="stylesheet" type="text/css" href="styles.css">
-    </head>
 
-    <body>
-        <header>
-            <a href="https://mail.google.com/mail/u/0/?tab=wm&ogbl#inbox" class="header-link">Bmail</a>
-            <a href="https://www.google.es/imghp?hl=es&tab=wi&ogbl" class="header-link">Images</a>
-            <a href="https://about.google/intl/es/products/?tab=rh"><img class="apps" src="images/apps.png"></a>
-            <a href="https://myaccount.google.com/?utm_source=OGB&tab=rk&utm_medium=act&pli=1&nlr=1"><img class="profile-icon" src="images/piano_cat.gif"/></a>
-        </header>
+<head>
+  <meta charset="utf-8" />
+  <title>Bongle</title>
+  <link rel="icon" href="images/favicon.png" />
+  <link rel="stylesheet" type="text/css" href="styles.css" />
+</head>
 
-        <form id="searchForm" onsubmit="search();return false" class="form-center">
-            <div>
-                <img id="catImage" class="cat-image"/>
-            </div>
-            <div id="searchDiv" class="search-div" onfocus="onSearchDivFocus()" tabindex="0">
-                <img src="images/lens_cat.png" class="search-image"/>
-                <input type="text" id="searchInput" name="q" placeholder="Search some cats :3" class="search-input" oninput="onInputChanged()" autofocus=true autocomplete="off" />
-                <img id="searchClearInput" src="images/clear_input.png" class="search-clear-input" onclick="clearInput()"/>
-            </div>
-            <div class="search-button-div">
-                <span class="search-button-span"><input type="submit" class="search-button" value="Bongle Search"/></span>
-                <span class="search-button-span"><input type="button" class="search-button" value="I'm Feeling Lucky" onclick="getLuck()"/></span>
-            </div>
-        </form>
+<body>
+  <header>
+    <a href="https://mail.google.com/mail/u/0/?tab=wm&ogbl#inbox" class="header-link">
+      Bmail
+    </a>
+    <a href="https://www.google.es/imghp?hl=es&tab=wi&ogbl" class="header-link">
+      Images
+    </a>
+    <a href="https://about.google/intl/es/products/?tab=rh">
+      <img class="apps" src="images/apps.png" />
+    </a>
+    <a href="https://myaccount.google.com/?utm_source=OGB&tab=rk&utm_medium=act&pli=1&nlr=1">
+      <img class="profile-icon" src="images/piano_cat.gif" />
+    </a>
+  </header>
 
-        <footer>
-            <div id="catParade" class="cat-parade">
-                <!--<img src="images/catparade/head.gif" style="width: 10vw; left: 20vw;">-->
-                <!--<div class="cat-parade">
+  <form id="searchForm" class="form-center">
+    <div>
+      <img id="keyboardCat" />
+    </div>
+    <div id="searchContainer" class="search-div" tabindex="0">
+      <img src="images/lens_cat.png" class="search-image" />
+      <input type="text" id="searchInput" name="q" placeholder="Search some cats :3" class="search-input"
+        autofocus="true" autocomplete="off" />
+      <img id="searchClearInput" src="images/clear_input.png" class="search-clear-input" onclick="clearInput()" />
+    </div>
+    <div class="search-button-div">
+      <span class="search-button-span"><input type="submit" class="search-button" value="Bongle Search" /></span>
+      <span class="search-button-span"><input type="button" class="search-button" value="I'm Feeling Lucky"
+          onclick="getLuck()" /></span>
+    </div>
+  </form>
+
+  <footer>
+    <div id="catParade" class="cat-parade">
+      <!--<img src="images/catparade/head.gif" style="width: 10vw; left: 20vw;">-->
+      <!--<div class="cat-parade">
                     <img src="images/catparade/head.gif" style="position:relative; width: 10vw; left: 20vw;">
                     <img src="images/catparade/head.gif" style="position:relative; width: 10vw; left: 50vw;">
                 </div>-->
-                <!--<span style="position: relative;"></span>-->
-            </div>
-            <div class="footer-info">
-                <div class="footer-info-localization">
-                    <img id="changeLocalization" src="" class="change-localization-buttom"/>
-                    <span id="localization"></span>
-                </div>
-                <span id="loveMessage" class="love-message"><span class="emoji">&#x2764;</span> Made with love :3 <span class="emoji">&#x2764;</span></span> 
-            </div> 
-        </footer>     
-        
-        
-    </body>
+      <!--<span style="position: relative;"></span>-->
+    </div>
+    <div class="footer-info">
+      <div class="footer-info-localization">
+        <img id="changeLocalization" src="" class="change-localization-buttom" />
+        <span id="localization"></span>
+      </div>
+      <span id="loveMessage" class="love-message">
+        <span class="emoji">&#x2764;</span>
+        Made with love :3
+        <span class="emoji">&#x2764;</span>
+      </span>
+    </div>
+  </footer>
+</body>
 
-    <script src="js/preloader.js"></script>
-    <script src="js/cat.js"></script>
-    <script src="js/catparade.js"></script>
-    <script src="js/geolocalization.js"></script>
+<script src="js/main.js"></script>
+<script src="js/catparade.js"></script>
 
-    <script>
-        window.onunload = function(){};
+<script>
+  initKeyboardCat();
+  initLocalization();
+  initSearcher();
 
-        var input = document.getElementById('searchInput');
-        var inputClear = document.getElementById('searchClearInput');
-        var form = document.getElementById('searchForm');
+  //window.onunload = function () { }
+</script>
 
-        onInputChanged();
-
-        function search(){
-            let text = input.value.trim();
-            
-            if(text.length > 0){
-                input.autocomplete = 'off';
-                window.location = 'https://www.google.com/search?q=' + text;
-            }
-        }
-
-        function onSearchDivFocus(){
-            input.focus();      
-        }
-
-        function onInputChanged(){
-            input.autocomplete = 'on';
-
-            if(input.value.length > 0){
-                inputClear.style.visibility = 'visible';
-            }
-            else{
-                inputClear.style.visibility = 'hidden';
-            }
-        }
-
-        function clearInput(){
-            input.value = '';
-            input.focus();  
-            onInputChanged();
-        }
-
-        function getLuck(){
-            input.autocomplete = 'off';
-
-            let text =  input.value.trim();
-            
-            if(text.length > 0){
-                let request = new XMLHttpRequest();
-                let queryUrl = `https://www.google.com/search?q=${text}`;
-                request.open('GET', `https://api.allorigins.win/raw?charset=UTF-8&url=${queryUrl}`, true);
-                //request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
-                request.responseType = "document";
-                
-                request.onload = function() { 
-                    if (this.readyState == 4 && this.status == 200) {
-
-                        let url = request.responseXML.querySelector('div.egMi0.kCrYT a')
-                            .getAttribute('href')
-                            .replace('/url?q=', '')
-                            .split('&sa=U')[0];
-
-                        window.location = decodeURIComponent(url);
-                   }
-                };
-                request.onerror = function(){window.location = 'https://www.google.com/doodles';};
-               request.send();
-            }else{
-                window.location = 'https://www.google.com/doodles';
-            }     
-        }
-    </script>
 </html>
