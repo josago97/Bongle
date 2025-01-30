@@ -169,8 +169,9 @@ input:focus::placeholder {
 }
 
 .profile-icon {
-  height: 50px;
-  width: 50px;
+  height: 100%;
+  max-height: 50px;
+  width: 100%;
   clip-path: circle(40% at center);
 }
 

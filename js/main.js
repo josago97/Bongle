@@ -1,8 +1,8 @@
 /* ============================= Keyboard cat ============================== */
 
 const meowAudio = "sounds/kitten4.wav"
-const keyCatNormal = "images/cat/cat_normal.png"
-const keyCatMeowed = "images/cat/cat_meowed.png"
+const keyCatNormal = "images/cat/cat_normal.webp"
+const keyCatMeowed = "images/cat/cat_meowed.webp"
 const keyCatLefts = [
   "images/cat/left/cat_left_1.png",
   "images/cat/left/cat_left_2.png",
