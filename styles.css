@@ -57,6 +57,15 @@ a:hover {
   text-decoration: underline;
 }
 
+button,
+input[type="submit"],
+input[type="button"] {
+  cursor: pointer;
+  background: inherit;
+  border: inherit;
+  font-size: inherit;
+}
+
 /* =================================== Header =================================== */
 
 header {
@@ -148,10 +157,6 @@ form {
   }
 }
 
-input[type="text"] {
-  font-size: 1.2rem;
-}
-
 input[type="text"]:focus::placeholder {
   color: transparent !important;
 }
@@ -159,7 +164,7 @@ input[type="text"]:focus::placeholder {
 #search-input {
   margin-inline: 10px;
   width: 100%;
-  font-size: 1.2rem;
+  font-size: 1.92rem;
   background-color: inherit;
   border: none;
   outline: none;
@@ -168,23 +173,38 @@ input[type="text"]:focus::placeholder {
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
-input:-webkit-autofill:active {
-  -webkit-animation: autofill 0s forwards;
-  animation: autofill 0s forwards;
-  -webkit-box-shadow: 0 0 0 1000px white inset !important;
+input:-webkit-autofill:active,
+input:-webkit-autofill::first-line {
+  -webkit-background-clip: text !important;
+
+  font-size: 2em !important;
 }
+
+input:-webkit-autofill::first-line {
+  font-size: 24px !important;
+}
+
+/*
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  background-color: transparent !important;
+  font-size: inherit;
+}*/
+
 
 @keyframes autofill {
   100% {
     background: transparent;
-    color: inherit;
+    color: inherit;font-size: 1.92rem;
   }
 }
 
 @-webkit-keyframes autofill {
   100% {
     background: transparent;
-    color: inherit;
+    color: inherit;font-size: 1.92rem;
   }
 }
 
@@ -279,13 +299,17 @@ input:-webkit-autofill:active {
   align-items: center;
 }
 
-.love-message {
+#love-message {
   font-family: "Comic Sans MS", "Comic Sans", cursive;
+
+  &:hover {
+    box-shadow: 0 0 4px rgb(71, 71, 71);
+    border-radius: 7.5px;
+  }
 }
 
 .love-message:hover {
-  box-shadow: 0 0 4px rgb(71, 71, 71);
-  border-radius: 7.5px;
+
   cursor: pointer;
 }
 
@@ -293,7 +317,7 @@ input:-webkit-autofill:active {
 
 /* =================================== Footer =================================== */
 
-.cat-parade {
+#cat-parade, .cat-parade {
   position: relative;
   font-size: 0;
 }
@@ -304,12 +328,10 @@ input:-webkit-autofill:active {
 
 /* =================================== Others =================================== */
 
-input[type="submit"],
-input[type="button"],
 #search-container,
 #keyboard-cat,
-.search-clear-input,
-.search-button {
+.search-button,
+.search-clear-input {
   cursor: pointer;
 }
 
