@@ -210,13 +210,11 @@ input:-webkit-autofill:active {
 
   padding: 0.6em 1em;
   background: light-dark(#f8f9fa, #303134);
-  font-size: 16px;
-  border: none;
   box-shadow: 0 0 5px grey;
   border-radius: var(--border-radius);
-  outline: none;
 
   &:hover {
+    position: relative;
     box-shadow: none;
 
     &::after {
@@ -230,24 +228,17 @@ input:-webkit-autofill:active {
       background: var(--rainbow);
       z-index: -1;
       filter: blur(3px);
-    
-      animation-name: search-div-animation;
-      animation-duration: 10s;
-      animation-iteration-count: infinite;
-      animation-timing-function: linear;
     }
+  }
+
+  input {
+    background: transparent;
+    font-size: 16px;
+    border: none;
+    outline: none;
   }
 }
 
-
-.search-button {
-  --border-radius: 8px;
-
-  display: inline-block;
-  position: relative;
-  height: fit-content;
-  margin: 0 10px 0 10px;
-}
 
 
 
@@ -288,10 +279,6 @@ input:-webkit-autofill:active {
   align-items: center;
 }
 
-.emoji {
-  font-family: "Segoe UI Emoji";
-}
-
 .love-message {
   font-family: "Comic Sans MS", "Comic Sans", cursive;
 }
@@ -311,13 +298,18 @@ input:-webkit-autofill:active {
   font-size: 0;
 }
 
+.emoji {
+  font-family: "Segoe UI Emoji";
+}
 
 /* =================================== Others =================================== */
 
-#searchContainer:hover,
-#keyboardCat:hover,
-.search-clear-input:hover,
-.search-button:hover {
+input[type="submit"],
+input[type="button"],
+#search-container,
+#keyboard-cat,
+.search-clear-input,
+.search-button {
   cursor: pointer;
 }
 
