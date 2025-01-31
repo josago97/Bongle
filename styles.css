@@ -164,7 +164,7 @@ input[type="text"]:focus::placeholder {
 #search-input {
   margin-inline: 10px;
   width: 100%;
-  font-size: 1.92rem;
+  font-size: 1.2em;
   background-color: inherit;
   border: none;
   outline: none;
@@ -173,39 +173,8 @@ input[type="text"]:focus::placeholder {
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
-input:-webkit-autofill:active,
-input:-webkit-autofill::first-line {
-  -webkit-background-clip: text !important;
-
-  font-size: 2em !important;
-}
-
-input:-webkit-autofill::first-line {
-  font-size: 24px !important;
-}
-
-/*
-input:-webkit-autofill,
-input:-webkit-autofill:hover,
-input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
-  background-color: transparent !important;
-  font-size: inherit;
-}*/
-
-
-@keyframes autofill {
-  100% {
-    background: transparent;
-    color: inherit;font-size: 1.92rem;
-  }
-}
-
-@-webkit-keyframes autofill {
-  100% {
-    background: transparent;
-    color: inherit;font-size: 1.92rem;
-  }
+  -webkit-background-clip: text !important;
 }
 
 .search-icon {
@@ -260,66 +229,44 @@ input:-webkit-autofill:active {
 }
 
 
+/* =================================== Footer =================================== */
 
-
-
-
-
-
-
-.change-localization-buttom {
-  height: 1em;
-  margin-right: 10px;
-  padding: 2px;
-  border-radius: 1em;
-  filter: brightness(40%);
-}
-
-.change-localization-buttom:hover {
-  box-shadow: 0 0 4px rgb(71, 71, 71);
-  cursor: pointer;
+#cat-parade, .cat {
+  position: relative;
+  font-size: 0;
 }
 
 .footer-info {
-  position: relative;
-  bottom: 0;
-  right: 0;
-  left: 0;
   display: flex;
+  padding: 10px 20px;
   align-items: center;
   justify-content: space-between;
-  width: auto;
-
-  padding: 10px 20px 10px 20px;
-  height: auto;
 }
 
-.footer-info-localization {
+.localization-info {
   display: flex;
+  gap: 0.5em;
   align-items: center;
+}
+
+#change-localization-icon {
+  height: 1em;
+  padding: 2px;
+  border-radius: 50%;
+  filter: brightness(40%);
+
+  &:hover {
+    box-shadow: 0 0 4px grey;
+  }
 }
 
 #love-message {
   font-family: "Comic Sans MS", "Comic Sans", cursive;
+  border-radius: 8px;
 
   &:hover {
-    box-shadow: 0 0 4px rgb(71, 71, 71);
-    border-radius: 7.5px;
+    box-shadow: 0 0 5px grey;
   }
-}
-
-.love-message:hover {
-
-  cursor: pointer;
-}
-
-
-
-/* =================================== Footer =================================== */
-
-#cat-parade, .cat-parade {
-  position: relative;
-  font-size: 0;
 }
 
 .emoji {
@@ -331,7 +278,8 @@ input:-webkit-autofill:active {
 #search-container,
 #keyboard-cat,
 .search-button,
-.search-clear-input {
+.search-clear-input,
+#change-localization-icon {
   cursor: pointer;
 }
 
@@ -340,7 +288,14 @@ input:-webkit-autofill:active {
     color: rgb(190, 190, 190);
   }
 
-  .apps-icon, #changeLocalization {
+  .apps-icon, #change-localization-icon {
     filter: brightness(90%);
+  }
+}
+
+@media screen and (max-width: 475px) {
+  .footer-info {
+    flex-direction: column;
+    gap: 10px;
   }
 }

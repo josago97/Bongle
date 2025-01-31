@@ -1,7 +1,8 @@
-const FPS = 100 //Fotogramas por segundo :3
-const SPACE = 1 //Espacio de separacion de gatitos (% de ancho de ventana) :3
-const START_OFFSET = 1 //Offset del tiempo en instanciar el primer gatito (segundos) :3
-const CAT_SIZE = 12 //Anchura de los gatitos (% de ancho de ventana) :3
+const FPS = 100 // Fotogramas por segundo :3
+const SPACE = 1 // Espacio de separacion de gatitos (% de ancho de ventana) :3
+const START_OFFSET = 1 // Offset del tiempo en instanciar el primer gatito (segundos) :3
+const CAT_SIZE = 12 // Anchura de los gatitos (% de ancho de ventana) :3
+const CAT_CLASS_NAME = "cat" // Clase para aplicar estilo a los gatos con instrumentos
 
 const HEAD = "images/catparade/head.gif"
 const ACCORDION = "images/catparade/accordion.gif"
@@ -14,7 +15,7 @@ const TRIANGLE = "images/catparade/triangle.gif"
 const TUBA = "images/catparade/tuba.gif"
 const XYLOPHONE = "images/catparade/xylophone.gif"
 
-const CAT_INSTRUMENTS = [
+const CATS = [
   HEAD,
   DRUM,
   GUITAR,
@@ -82,11 +83,12 @@ function create() {
   const dom = document.createElement("div")
   let position = -CAT_SIZE / 2
 
-  for (var cat of CAT_INSTRUMENTS) {
+  for (var cat of CATS) {
     const image = document.createElement("img")
     image.src = cat
     image.style.position = "absolute"
     image.style.bottom = 0
+    image.style.minWidth = CAT_SIZE * 5 + "px"
     image.style.width = CAT_SIZE + "vw"
     image.style.maxWidth = CAT_SIZE * 2 + "vh"
     image.style.left = position + "vw"
@@ -94,11 +96,11 @@ function create() {
     position -= SPACE + CAT_SIZE
   }
 
-  dom.className = "cat-parade"
+  dom.className = CAT_CLASS_NAME
   dom.style.left = "-100vw"
   catParent.appendChild(dom)
   catInstances = dom
-  size = CAT_SIZE * CAT_INSTRUMENTS.length + SPACE * (CAT_SIZE - 1)
+  size = CAT_SIZE * CATS.length + SPACE * (CAT_SIZE - 1)
 }
 
 function wait(time) {

@@ -9,7 +9,7 @@
   <meta name="viewport" content="width=device-width" />
   <link rel="icon" href="images/favicon.png" />
   <link rel="stylesheet" type="text/css" href="styles.css" />
-  <link rel="preload" fetchpriority="high" as="image" href="images/cat/cat_normal.webp" type="image/webp" />
+  <link rel="preload" fetchpriority="high" as="image" href="images/cat/normal_cat.webp" type="image/webp" />
 </head>
 
 <body>
@@ -32,7 +32,7 @@
   </header>
 
   <form>
-    <img id="keyboard-cat" alt="cat typing on keyboard" />
+    <img id="keyboard-cat" src="images/cat/normal_cat.webp" alt="cat typing on keyboard" />
     <div id="search-container" tabindex="0">
       <img src="images/lens_cat.webp" alt="search image" class="search-icon" />
       <input type="text" id="search-input" name="q" placeholder="Search some cats :3" autofocus="true"
@@ -52,8 +52,8 @@
   <footer>
     <div id="cat-parade"></div>
     <div class="footer-info">
-      <div class="footer-info-localization">
-        <img id="changeLocalization" src="" alt="Change localization" class="change-localization-buttom" />
+      <div class="localization-info">
+        <img id="change-localization-icon" alt="Change localization" />
         <span id="localization"></span>
       </div>
       <button id="love-message">

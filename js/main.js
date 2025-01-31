@@ -1,8 +1,8 @@
 /* ============================= Keyboard cat ============================== */
 
 const meowAudio = "sounds/kitten4.wav"
-const keyCatNormal = "images/cat/cat_normal.webp"
-const keyCatMeowed = "images/cat/cat_meowed.webp"
+const keyCatNormal = "images/cat/normal_cat.webp"
+const keyCatMeowed = "images/cat/meowed_cat.webp"
 const keyCatLefts = [
   "images/cat/left/cat_left_1.png",
   "images/cat/left/cat_left_2.png",
@@ -82,7 +82,9 @@ function meow() {
 /* ============================= Localization ============================== */
 
 const localizationDisplay = document.getElementById("localization")
-const changeLocalizationButtom = document.getElementById("changeLocalization")
+const changeLocalizationButtom = document.getElementById(
+  "change-localization-icon"
+)
 let localizationPositionElement
 let localizationIpElement
 let showIp = false
