@@ -1,129 +1,81 @@
 <!DOCTYPE html>
 
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>Bongle</title>
-    <meta
-      name="description"
-      content="Bongle, the cats favourite search engine."
-    />
-    <meta name="viewport" content="width=device-width" />
-    <link rel="icon" href="images/favicon.png" />
-    <link rel="stylesheet" type="text/css" href="styles.css" />
-    <link
-      rel="preload"
-      fetchpriority="high"
-      as="image"
-      href="images/cat/cat_normal.webp"
-      type="image/webp"
-    />
-  </head>
 
-  <body>
-    <header>
-      <a
-        href="https://mail.google.com/mail/u/0/?tab=wm&ogbl#inbox"
-        class="header-link"
-      >
-        Bmail
-      </a>
-      <a
-        href="https://www.google.es/imghp?hl=es&tab=wi&ogbl"
-        class="header-link"
-      >
-        Images
-      </a>
-      <a href="https://about.google/intl/es/products/?tab=rh">
-        <img class="apps" alt="apps" src="images/apps.webp" />
-      </a>
-      <a
-        title="Go to your account"
-        href="https://myaccount.google.com/?utm_source=OGB&tab=rk&utm_medium=act&pli=1&nlr=1"
-      >
-        <video class="profile-icon" autoplay muted loop>
-          <source src="images/piano_cat.webm" type="video/webm" />
-          Your browser does not support the video tag.
-        </video>
-      </a>
-    </header>
+<head>
+  <meta charset="utf-8" />
+  <title>Bongle</title>
+  <meta name="description" content="Bongle, the cats favourite search engine." />
+  <meta name="viewport" content="width=device-width" />
+  <link rel="icon" href="images/favicon.png" />
+  <link rel="stylesheet" type="text/css" href="styles.css" />
+  <link rel="preload" fetchpriority="high" as="image" href="images/cat/cat_normal.webp" type="image/webp" />
+</head>
 
-    <form id="searchForm" class="form-center">
-      <div>
-        <img id="keyboardCat" alt="cat typing on keyboard" />
+<body>
+  <header>
+    <a href="https://mail.google.com/mail/u/0/?tab=wm&ogbl#inbox" class="header-link">
+      Bmail
+    </a>
+    <a href="https://www.google.es/imghp?hl=es&tab=wi&ogbl" class="header-link">
+      Images
+    </a>
+    <a href="https://about.google/intl/es/products/?tab=rh">
+      <img class="apps-icon" alt="apps" src="images/apps.webp" title="Aplicaciones de Bongle" />
+    </a>
+    <a title="Go to your account" href="https://myaccount.google.com/?utm_source=OGB&tab=rk&utm_medium=act&pli=1&nlr=1">
+      <video class="profile-icon" autoplay muted loop>
+        <source src="images/piano_cat.webm" type="video/webm" />
+        Your browser does not support the video tag.
+      </video>
+    </a>
+  </header>
+
+  <form>
+    <img id="keyboard-cat" alt="cat typing on keyboard" />
+    <div id="search-container" tabindex="0">
+      <img src="images/lens_cat.webp" alt="search image" class="search-icon" />
+      <input type="text" id="search-input" name="q" placeholder="Search some cats :3" autofocus="true"
+        autocomplete="off" />
+      <img id="clear-search-icon" src="images/clear_input.webp" onclick="clearInput()" />
+    </div>
+    <div class="search-buttons-container">
+      <input type="submit" class="search-button" value="Bongle Search" />
+      <input type="button" class="search-button" value="I'm Feeling Lucky" onclick="getLuck()" />
+      <!--<span class="search-button-span">
+        
+      </span>
+      <span class="search-button-span">
+        <input type="button" class="search-button" value="I'm Feeling Lucky" onclick="getLuck()" />
+      </span>-->
+    </div>
+  </form>
+
+  <footer>
+    <div id="catParade" class="cat-parade"></div>
+    <div class="footer-info">
+      <div class="footer-info-localization">
+        <img id="changeLocalization" src="" alt="Change localization" class="change-localization-buttom" />
+        <span id="localization"></span>
       </div>
-      <div id="searchContainer" class="search-div" tabindex="0">
-        <img
-          src="images/lens_cat.webp"
-          alt="search image"
-          class="search-image"
-        />
-        <input
-          type="text"
-          id="searchInput"
-          name="q"
-          placeholder="Search some cats :3"
-          class="search-input"
-          autofocus="true"
-          autocomplete="off"
-        />
-        <img
-          id="searchClearInput"
-          src="images/clear_input.webp"
-          class="search-clear-input"
-          onclick="clearInput()"
-        />
-      </div>
-      <div class="search-button-div">
-        <span class="search-button-span"
-          ><input type="submit" class="search-button" value="Bongle Search"
-        /></span>
-        <span class="search-button-span"
-          ><input
-            type="button"
-            class="search-button"
-            value="I'm Feeling Lucky"
-            onclick="getLuck()"
-        /></span>
-      </div>
-    </form>
+      <span id="loveMessage" class="love-message">
+        <span class="emoji">&#x2764;</span>
+        Made with love :3
+        <span class="emoji">&#x2764;</span>
+      </span>
+    </div>
+  </footer>
+</body>
 
-    <footer>
-      <div id="catParade" class="cat-parade">
-        <!--<img src="images/catparade/head.gif" style="width: 10vw; left: 20vw;">-->
-        <!--<div class="cat-parade">
-                    <img src="images/catparade/head.gif" style="position:relative; width: 10vw; left: 20vw;">
-                    <img src="images/catparade/head.gif" style="position:relative; width: 10vw; left: 50vw;">
-                </div>-->
-        <!--<span style="position: relative;"></span>-->
-      </div>
-      <div class="footer-info">
-        <div class="footer-info-localization">
-          <img
-            id="changeLocalization"
-            src=""
-            alt="Change localization"
-            class="change-localization-buttom"
-          />
-          <span id="localization"></span>
-        </div>
-        <span id="loveMessage" class="love-message">
-          <span class="emoji">&#x2764;</span>
-          Made with love :3
-          <span class="emoji">&#x2764;</span>
-        </span>
-      </div>
-    </footer>
-  </body>
+<script src="js/main.js"></script>
+<script src="js/catparade.js"></script>
 
-  <script src="js/main.js"></script>
-  <script src="js/catparade.js"></script>
+<script>
+  initKeyboardCat()
+  initLocalization()
+  initSearcher()
 
-  <script>
-    initKeyboardCat()
-    initLocalization()
-    initSearcher()
+  //window.onunload = function () { }
+</script>
 
-    //window.onunload = function () { }
-  </script>
 </html>

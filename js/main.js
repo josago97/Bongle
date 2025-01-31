@@ -15,7 +15,7 @@ const keyCatRights = [
   "images/cat/right/cat_right_3.png",
   "images/cat/right/cat_right_4.png",
 ]
-const keyCatImage = document.getElementById("keyboardCat")
+const keyCatImage = document.getElementById("keyboard-cat")
 let isMeowing = false
 let isRightArmTurn = Math.random() < 0.5
 let lastKeyPressed = null
@@ -27,7 +27,7 @@ function initKeyboardCat() {
   keyCatImage.src = keyCatNormal
   keyCatImage.addEventListener("click", meow)
 
-  const searchInput = document.getElementById("searchInput")
+  const searchInput = document.getElementById("search-input")
   searchInput.addEventListener("keydown", onKeyDown)
   searchInput.addEventListener("keyup", onKeyUp)
   searchInput.addEventListener("focusout", onFocusOut)
@@ -138,16 +138,16 @@ function updateLocalization() {
   } else {
     localizationPositionElement.style.display = "initial"
     localizationIpElement.style.display = "none"
-    changeLocalizationButtom.src = "images/world.png"
+    changeLocalizationButtom.src = "images/world.webp"
   }
 }
 
 /* ================================= Searcher ================================= */
 
-const searchContainer = document.getElementById("searchContainer")
-const searchInput = document.getElementById("searchInput")
-const searchInputClear = document.getElementById("searchClearInput")
-const form = document.getElementById("searchForm")
+const searchContainer = document.getElementById("search-container")
+const searchInput = document.getElementById("search-input")
+const searchInputClear = document.getElementById("clear-search-icon")
+const form = document.querySelector("form")
 
 function initSearcher() {
   searchContainer.addEventListener("focus", focusSearchInput)
