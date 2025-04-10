@@ -69,11 +69,12 @@
 <script src="js/catparade.js"></script>
 
 <script>
-  initKeyboardCat()
-  initLocalization()
-  initSearcher()
-
-  //window.onunload = function () { }
+  window.addEventListener('pageshow', (_) => {
+    initKeyboardCat()
+    initLocalization()
+    initSearcher()
+    initCatParade()
+  });
 </script>
 
 </html>

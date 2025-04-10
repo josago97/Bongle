@@ -2,7 +2,6 @@ const FPS = 100 // Fotogramas por segundo :3
 const SPACE = 1 // Espacio de separacion de gatitos (% de ancho de ventana) :3
 const START_OFFSET = 1 // Offset del tiempo en instanciar el primer gatito (segundos) :3
 const CAT_SIZE = 12 // Anchura de los gatitos (% de ancho de ventana) :3
-const CAT_CLASS_NAME = "cat" // Clase para aplicar estilo a los gatos con instrumentos
 
 const HEAD = "images/catparade/head.gif"
 const ACCORDION = "images/catparade/accordion.gif"
@@ -37,16 +36,17 @@ const CATS = [
 ]
 
 let audio
-let catInstances
-let catInstancesPos = 0
-let deltaTime = 0
 let running = false
-let catParent = document.getElementById("cat-parade")
 let size
+const catsContainer = document.getElementById("cat-parade")
 
-document.getElementById("love-message").addEventListener("click", start)
+function initCatParade() {
+  running = false
+  catsContainer.innerHTML = null
+  document.getElementById("love-message").addEventListener("click", start)
+}
 
-async function start() {
+function start() {
   if (!running) {
     running = true
     create()
@@ -56,19 +56,17 @@ async function start() {
 }
 
 async function update() {
-  let lastime
   while (running) {
-    lastime = performance.now()
     move()
-    await wait(1000 / FPS)
-    deltaTime = (performance.now() - lastime) / 1000
+    await delay(1000 / FPS)
   }
 }
 
 function move() {
-  const prop =
-    (audio.currentTime - START_OFFSET) / (audio.duration - START_OFFSET)
-  catInstances.style.left = prop * (size + 100) + "vw"
+  const totalTime = audio.duration - START_OFFSET
+  const currentTime = audio.currentTime - START_OFFSET
+  const factor = currentTime / totalTime
+  catsContainer.style.left = factor * (size + 100) + "vw"
 }
 
 function playSong() {
@@ -80,10 +78,9 @@ function playSong() {
 }
 
 function create() {
-  const dom = document.createElement("div")
   let position = -CAT_SIZE / 2
 
-  for (var cat of CATS) {
+  for (const cat of CATS) {
     const image = document.createElement("img")
     image.src = cat
     image.style.position = "absolute"
@@ -92,27 +89,19 @@ function create() {
     image.style.width = CAT_SIZE + "vw"
     image.style.maxWidth = CAT_SIZE * 2 + "vh"
     image.style.left = position + "vw"
-    dom.appendChild(image)
+    catsContainer.appendChild(image)
     position -= SPACE + CAT_SIZE
   }
 
-  dom.className = CAT_CLASS_NAME
-  dom.style.left = "-100vw"
-  catParent.appendChild(dom)
-  catInstances = dom
+  catsContainer.style.left = "-100vw"
   size = CAT_SIZE * CATS.length + SPACE * (CAT_SIZE - 1)
 }
 
-function wait(time) {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve()
-    }, time)
-  })
+function delay(milliseconds) {
+  return new Promise((resolve) => setTimeout(resolve, milliseconds))
 }
 
 function finish() {
   running = false
-  catParent.removeChild(catInstances)
-  catInstancesPos = 0
+  catsContainer.innerHTML = null
 }

@@ -231,7 +231,7 @@ input:-webkit-autofill:active {
 
 /* =================================== Footer =================================== */
 
-#cat-parade, .cat {
+#cat-parade {
   position: relative;
   font-size: 0;
 }
