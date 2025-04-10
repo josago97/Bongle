@@ -25,6 +25,7 @@ function initKeyboardCat() {
   preload()
 
   keyCatImage.src = keyCatNormal
+  isMeowing = false
   keyCatImage.addEventListener("click", meow)
 
   const searchInput = document.getElementById("search-input")
