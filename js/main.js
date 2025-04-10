@@ -26,7 +26,6 @@ function initKeyboardCat() {
 
   keyCatImage.src = keyCatNormal
   isMeowing = false
-  console.log("Init", isMeowing)
   keyCatImage.addEventListener("click", meow)
 
   const searchInput = document.getElementById("search-input")
@@ -67,8 +66,6 @@ function onFocusOut() {
 }
 
 function meow() {
-  console.log("Meow", isMeowing)
-
   if (!isMeowing) {
     clearTimeout(catKeytimer)
     isMeowing = true
