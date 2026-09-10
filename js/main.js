@@ -1,226 +1,219 @@
 /* ============================= Keyboard cat ============================== */
 
-const meowAudio = "sounds/kitten4.wav"
-const keyCatNormal = "images/cat/normal_cat.webp"
-const keyCatMeowed = "images/cat/meowed_cat.webp"
+const meowAudio = 'sounds/kitten4.wav';
+const keyCatNormal = 'images/cat/normal_cat.webp';
+const keyCatMeowed = 'images/cat/meowed_cat.webp';
 const keyCatLefts = [
-  "images/cat/left/cat_left_1.png",
-  "images/cat/left/cat_left_2.png",
-  "images/cat/left/cat_left_3.png",
-  "images/cat/left/cat_left_4.png",
-]
+  'images/cat/left/cat_left_1.png',
+  'images/cat/left/cat_left_2.png',
+  'images/cat/left/cat_left_3.png',
+  'images/cat/left/cat_left_4.png',
+];
 const keyCatRights = [
-  "images/cat/right/cat_right_1.png",
-  "images/cat/right/cat_right_2.png",
-  "images/cat/right/cat_right_3.png",
-  "images/cat/right/cat_right_4.png",
-]
-const keyCatImage = document.getElementById("keyboard-cat")
-let isMeowing = false
-let isRightArmTurn = Math.random() < 0.5
-let lastKeyPressed = null
-let catKeytimer = null
+  'images/cat/right/cat_right_1.png',
+  'images/cat/right/cat_right_2.png',
+  'images/cat/right/cat_right_3.png',
+  'images/cat/right/cat_right_4.png',
+];
+const keyCatImage = document.getElementById('keyboard-cat');
+let isMeowing = false;
+let isRightArmTurn = Math.random() < 0.5;
+let lastKeyPressed = null;
+let catKeytimer = null;
 
 function initKeyboardCat() {
-  preload()
+  preload();
 
-  keyCatImage.src = keyCatNormal
-  isMeowing = false
-  keyCatImage.addEventListener("click", meow)
+  keyCatImage.src = keyCatNormal;
+  isMeowing = false;
+  keyCatImage.addEventListener('click', meow);
 
-  const searchInput = document.getElementById("search-input")
-  searchInput.addEventListener("keydown", onKeyDown)
-  searchInput.addEventListener("keyup", onKeyUp)
-  searchInput.addEventListener("focusout", onFocusOut)
+  const searchInput = document.getElementById('search-input');
+  searchInput.addEventListener('keydown', onKeyDown);
+  searchInput.addEventListener('keyup', onKeyUp);
+  searchInput.addEventListener('focusout', onFocusOut);
 }
 
 function preload() {
-  const images = [keyCatNormal, keyCatMeowed, ...keyCatLefts, ...keyCatRights]
-  preloadImages(images)
-  preloadAudio(meowAudio)
+  const images = [keyCatNormal, keyCatMeowed, ...keyCatLefts, ...keyCatRights];
+  preloadImages(images);
+  preloadAudio(meowAudio);
 }
 
 function onKeyDown(event) {
-  clearTimeout(catKeytimer)
+  clearTimeout(catKeytimer);
 
   if (lastKeyPressed != event.key && !event.repeat && !isMeowing) {
-    const arms = isRightArmTurn ? keyCatLefts : keyCatRights
-    const randomIndex = Math.floor(Math.random() * arms.length)
-    keyCatImage.src = arms[randomIndex]
-    isRightArmTurn = !isRightArmTurn
-    lastKeyPressed = event.key
+    const arms = isRightArmTurn ? keyCatLefts : keyCatRights;
+    const randomIndex = Math.floor(Math.random() * arms.length);
+    keyCatImage.src = arms[randomIndex];
+    isRightArmTurn = !isRightArmTurn;
+    lastKeyPressed = event.key;
   }
 }
 
 function onKeyUp(event) {
   if (event.key == lastKeyPressed) {
-    onFocusOut()
-    lastKeyPressed = null
+    onFocusOut();
+    lastKeyPressed = null;
   }
 }
 
 function onFocusOut() {
   catKeytimer = setTimeout(() => {
-    keyCatImage.src = keyCatNormal
-  }, 200)
+    keyCatImage.src = keyCatNormal;
+  }, 200);
 }
 
 function meow() {
   if (!isMeowing) {
-    clearTimeout(catKeytimer)
-    isMeowing = true
-    keyCatImage.src = keyCatMeowed
-    const audio = new Audio(meowAudio)
+    clearTimeout(catKeytimer);
+    isMeowing = true;
+    keyCatImage.src = keyCatMeowed;
+    const audio = new Audio(meowAudio);
     audio.onended = () => {
-      isMeowing = false
-      keyCatImage.src = keyCatNormal
-    }
-    audio.volume = 0.25
-    audio.play()
+      isMeowing = false;
+      keyCatImage.src = keyCatNormal;
+    };
+    audio.volume = 0.25;
+    audio.play();
   }
 }
 
 /* ============================= Localization ============================== */
 
-const localizationDisplay = document.getElementById("localization")
-const changeLocalizationButtom = document.getElementById(
-  "change-localization-icon"
-)
-let localizationPositionElement
-let localizationIpElement
-let showIp = false
+const localizationDisplay = document.getElementById('localization');
+const changeLocalizationButtom = document.getElementById('change-localization-icon');
+let localizationPositionElement;
+let localizationIpElement;
+let showIp = false;
 
 async function initLocalization() {
-  changeLocalizationButtom.style.display = "none"
-  changeLocalizationButtom.addEventListener("click", changeLocalization, false)
-  localizationDisplay.innerHTML = null
-  localizate()
+  changeLocalizationButtom.style.display = 'none';
+  changeLocalizationButtom.addEventListener('click', changeLocalization, false);
+  localizationDisplay.innerHTML = null;
+  localizate();
 }
 
 async function localizate() {
   try {
-    const response = await (
-      await fetch("https://get.geojs.io/v1/ip/geo.json")
-    ).json()
+    const response = await (await fetch('https://ipv4.geojs.io/v1/ip/geo.json')).json();
 
     // Ponemos posición geográfica
-    const position = [response.city, response.region, response.country].join(
-      ", "
-    )
-    const coordenates = `${response.latitude},${response.longitude}`
-    const maps = `https://www.google.es/maps/@${coordenates},12z`
-    localizationPositionElement = document.createElement("a")
-    localizationDisplay.appendChild(localizationPositionElement)
-    localizationPositionElement.href = maps
-    localizationPositionElement.innerHTML = position
-    localizationPositionElement.className = "footer-link"
+    const position = [response.city, response.region, response.country].join(', ');
+    const coordenates = `${response.latitude},${response.longitude}`;
+    const maps = `https://www.google.es/maps/@${coordenates},12z`;
+    localizationPositionElement = document.createElement('a');
+    localizationDisplay.appendChild(localizationPositionElement);
+    localizationPositionElement.href = maps;
+    localizationPositionElement.innerHTML = position;
+    localizationPositionElement.className = 'footer-link';
 
     // Ponemos dirección IP
-    const ip = response.ip
-    localizationIpElement = document.createElement("span")
-    localizationDisplay.appendChild(localizationIpElement)
-    localizationIpElement.innerHTML = ip
+    const ip = response.ip;
+    localizationIpElement = document.createElement('span');
+    localizationDisplay.appendChild(localizationIpElement);
+    localizationIpElement.innerHTML = ip;
 
-    changeLocalizationButtom.style.display = "initial"
-    updateLocalization()
+    changeLocalizationButtom.style.display = 'initial';
+    updateLocalization();
   } catch {
-    localizationDisplay.innerHTML =
-      "Error geolocalization (try disable Ad Blockers)"
+    localizationDisplay.innerHTML = 'Error geolocalization (try disable Ad Blockers)';
   }
 }
 
 function changeLocalization() {
-  showIp = !showIp
-  updateLocalization()
+  showIp = !showIp;
+  updateLocalization();
 }
 
 function updateLocalization() {
   if (showIp) {
-    localizationPositionElement.style.display = "none"
-    localizationIpElement.style.display = "initial"
-    changeLocalizationButtom.src = "images/ip.png"
+    localizationPositionElement.style.display = 'none';
+    localizationIpElement.style.display = 'initial';
+    changeLocalizationButtom.src = 'images/ip.png';
   } else {
-    localizationPositionElement.style.display = "initial"
-    localizationIpElement.style.display = "none"
-    changeLocalizationButtom.src = "images/world.webp"
+    localizationPositionElement.style.display = 'initial';
+    localizationIpElement.style.display = 'none';
+    changeLocalizationButtom.src = 'images/world.webp';
   }
 }
 
 /* ================================= Searcher ================================= */
 
-const searchContainer = document.getElementById("search-container")
-const searchInput = document.getElementById("search-input")
-const searchInputClear = document.getElementById("clear-search-icon")
-const form = document.querySelector("form")
+const searchContainer = document.getElementById('search-container');
+const searchInput = document.getElementById('search-input');
+const searchInputClear = document.getElementById('clear-search-icon');
+const form = document.querySelector('form');
 
 function initSearcher() {
-  searchContainer.addEventListener("focus", focusSearchInput)
-  searchInput.addEventListener("input", onInputChanged)
-  form.addEventListener("submit", onSearchSubmit)
+  searchContainer.addEventListener('focus', focusSearchInput);
+  searchInput.addEventListener('input', onInputChanged);
+  form.addEventListener('submit', onSearchSubmit);
 
-  focusSearchInput()
-  onInputChanged()
+  focusSearchInput();
+  onInputChanged();
 }
 
 function focusSearchInput() {
-  searchInput.focus()
+  searchInput.focus();
 }
 
 function getSearchInputValue() {
-  return searchInput.value.trim()
+  return searchInput.value.trim();
 }
 
 function onSearchSubmit(event) {
-  event.preventDefault() // Evita que el formulario se envíe
+  event.preventDefault(); // Evita que el formulario se envíe
 
-  const text = getSearchInputValue()
+  const text = getSearchInputValue();
 
   if (text.length > 0) {
-    searchInput.autocomplete = "off"
-    window.location = `https://www.google.com/search?q=${text}`
+    searchInput.autocomplete = 'off';
+    window.location = `https://www.google.com/search?q=${text}`;
   }
 }
 
 function onInputChanged() {
-  searchInput.autocomplete = "on"
+  searchInput.autocomplete = 'on';
 
   if (searchInput.value.length > 0) {
-    searchInputClear.style.visibility = "visible"
+    searchInputClear.style.visibility = 'visible';
   } else {
-    searchInputClear.style.visibility = "hidden"
+    searchInputClear.style.visibility = 'hidden';
   }
 }
 
 function clearInput() {
-  searchInput.value = ""
-  focusSearchInput()
-  onInputChanged()
+  searchInput.value = '';
+  focusSearchInput();
+  onInputChanged();
 }
 
 async function getLuck() {
-  searchInput.autocomplete = "off"
-  const text = getSearchInputValue()
+  searchInput.autocomplete = 'off';
+  const text = getSearchInputValue();
 
   if (text.length > 0) {
-    const queryUrl = `https://www.google.com/search?q=${text}`
-    const proxyUrl = `https://api.allorigins.win/raw?charset=UTF-8&url=${queryUrl}`
+    const queryUrl = `https://www.google.com/search?q=${text}`;
+    const proxyUrl = `https://api.allorigins.win/raw?charset=UTF-8&url=${queryUrl}`;
 
     try {
-      const html = await (await fetch(proxyUrl)).text()
-      const parser = new DOMParser()
-      const doc = parser.parseFromString(html, "text/html")
+      const html = await (await fetch(proxyUrl)).text();
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(html, 'text/html');
       const url = doc
-        .querySelector("div.egMi0.kCrYT a")
-        .getAttribute("href")
-        .replace("/url?q=", "")
-        .split("&sa=U")[0]
+        .querySelector('div.egMi0.kCrYT a')
+        .getAttribute('href')
+        .replace('/url?q=', '')
+        .split('&sa=U')[0];
 
-      window.location = decodeURIComponent(url)
+      window.location = decodeURIComponent(url);
     } catch {
-      window.location = "https://www.google.com/doodles"
+      window.location = 'https://www.google.com/doodles';
     }
   } else {
-    window.location = "https://www.google.com/doodles"
+    window.location = 'https://www.google.com/doodles';
   }
 }
 
@@ -228,16 +221,16 @@ async function getLuck() {
 
 function preloadImages(images) {
   images.forEach((element) => {
-    preloadImage(element)
-  })
+    preloadImage(element);
+  });
 }
 
 function preloadImage(image) {
-  const aux = new Image()
-  aux.src = image
+  const aux = new Image();
+  aux.src = image;
 }
 
 function preloadAudio(audio) {
-  const aux = new Audio(audio)
-  aux.preload = "auto"
+  const aux = new Audio(audio);
+  aux.preload = 'auto';
 }
